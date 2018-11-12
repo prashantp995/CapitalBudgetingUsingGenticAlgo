@@ -8,6 +8,10 @@ public class Population {
     chromosomes = new Chromosome[populationSize];
   }
 
+  public Chromosome[] getChromosomes() {
+    return chromosomes;
+  }
+
   public Population initializePopulation() {
     for (int x = 0; x < chromosomes.length; x++) {
       chromosomes[x] = new Chromosome(GeneticAlgorithm.target_chromosome_length)
