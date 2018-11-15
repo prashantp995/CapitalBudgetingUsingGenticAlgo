@@ -1,3 +1,4 @@
+import java.text.DecimalFormat;
 import java.util.Arrays;
 
 public class Chromosome {
@@ -58,12 +59,13 @@ public class Chromosome {
     }
 
     double maxFitness = fitnessY1 + fitnessY2 + fitnessY3;
-    return maxFitness;
+    DecimalFormat dec = new DecimalFormat("#0.00");
+    return Double.parseDouble(dec.format(maxFitness));
 
   }
 
   @Override
   public String toString() {
-    return Arrays.toString(genes) + "\n";
+    return Arrays.toString(genes) ;
   }
 }
