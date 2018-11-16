@@ -32,13 +32,11 @@ public class Chromosome {
 
 
   public static double calculateFitness(int[] values) {
-    int[] year1 = Arrays.copyOfRange(values, 0, 4);
-    int[] year2 = Arrays.copyOfRange(values, 4, 8);
-    int[] year3 = Arrays.copyOfRange(values, 8, 12);
-
-    double Y1Constraint = 0.5 * year1[0] + 1.0 * year1[1] + 1.5 * year1[2] + 0.1 * year1[3];
-    double Y2Constraint = 0.3 * year2[0] + 0.8 * year2[1] + 1.5 * year2[2] + 0.4 * year2[3];
-    double Y3Constraint = 0.2 * year3[0] + 0.2 * year3[1] + 0.3 * year3[2] + 0.1 * year3[3];
+    //int[] values = Arrays.copyOfRange(values, 0, 4);
+    
+    double Y1Constraint = 0.5 * values[0] + 1.0 * values[1] + 1.5 * values[2] + 0.1 * values[3];
+    double Y2Constraint = 0.3 * values[0] + 0.8 * values[1] + 1.5 * values[2] + 0.4 * values[3];
+    double Y3Constraint = 0.2 * values[0] + 0.2 * values[1] + 0.3 * values[2] + 0.1 * values[3];
 
     double budgetY1 = 3.1;
     double budgetY2 = 2.5;
@@ -48,15 +46,10 @@ public class Chromosome {
     double fitnessY2 = 0.0;
     double fitnessY3 = 0.0;
 
-    if (Y1Constraint <= budgetY1) {
-      fitnessY1 = 0.2 * year1[0] + 0.3 * year1[1] + 0.5 * year1[2] + 0.1 * year1[3];
+    if (Y1Constraint <= budgetY1 && Y2Constraint <= budgetY2 && Y3Constraint <= budgetY3) {
+      fitnessY1 = 0.2 * values[0] + 0.3 * values[1] + 0.5 * values[2] + 0.1 * values[3];
     }
-    if (Y2Constraint <= budgetY2) {
-      fitnessY2 = 0.2 * year2[0] + 0.3 * year2[1] + 0.5 * year2[2] + 0.1 * year2[3];
-    }
-    if (Y3Constraint <= budgetY3) {
-      fitnessY3 = 0.2 * year3[0] + 0.3 * year3[1] + 0.5 * year3[2] + 0.1 * year3[3];
-    }
+
 
     double maxFitness = fitnessY1 + fitnessY2 + fitnessY3;
     DecimalFormat dec = new DecimalFormat("#0.00");

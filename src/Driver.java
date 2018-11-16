@@ -3,21 +3,30 @@ import java.util.Arrays;
 public class Driver {
 
   public static void main(String[] args) {
-    int maxGenerations = 12;
+
+    int fitnessTrack = 0;
+    double fittestChromosomeFitness = 0.0;
     printInitialDetails();
     Population population = new Population(GeneticAlgorithm.POPULATION_SIZE).initializePopulation();
     GeneticAlgorithm geneticAlgorithm = new GeneticAlgorithm();
     System.out.println("-------------------------------------------------");
     System.out.println("Initial Population");
     System.out.println(
-        "total 3 year and we have total 4 projects , total 12 index , for that reason  12 genes per chromosome");
+        "Total 3 year and we have total 4 projects , total 12 index , for that reason  12 genes per chromosome");
     System.out.println(
         "Generation # 0 " + " | Fittest chromosome fitness: " + population.chromosomes[0]
             .getFitness());
     printPopulation(population,
         "Population of this generation is (Sorted based on Fitness )");
     int generationNumber = 0;
-    while (generationNumber < maxGenerations) {
+    fittestChromosomeFitness = population.chromosomes[0]
+        .getFitness();
+    /*
+      stopping criteria :
+      1 )if generation exceed maximum number of allowed generation stop it
+      2 ) if there is no fitness change over 3 continuous generation , break the loop
+     */
+    while (generationNumber < GeneticAlgorithm.MAX_GENERATION) {
       generationNumber++;
       System.out.println("\n-------------------------------------------------");
       System.out.println("Process start for the Generation # " + generationNumber);
@@ -30,31 +39,27 @@ public class Driver {
               population.chromosomes[0].getFitness());
       printPopulation(population,
           "Population of this generation is (Sorted based on Fitness ): ");
+      /**
+       * if there is no change in fitness over 3 generation break it
+       */
+      if (population.chromosomes[0].getFitness() == fittestChromosomeFitness) {
+        fitnessTrack++;
+        if (fitnessTrack > 3) {
+          System.out.println(
+              "Stopping regardless of generation remaining ,because there is no change found in previous 3 generations");
+          break;
+        }
+      }
+
     }
   }
+
 
   private static void printInitialDetails() {
     System.out.println("Mutation Probability is " + GeneticAlgorithm.MUTATION_RATE);
     System.out.println("Size of the population is " + GeneticAlgorithm.POPULATION_SIZE);
   }
 
-  public static void init() {
-
-    int totalSamples = 180;
-    int counter = 0;
-    while (counter < totalSamples) {
-      int[] testArray = new int[18];
-      for (int x = 0; x < testArray.length; x++) {
-        if (Math.random() >= 0.5) {
-          testArray[x] = 1;
-        } else {
-          testArray[x] = 0;
-        }
-      }
-      counter++;
-      System.out.println("Testing with" + Arrays.toString(testArray));
-    }
-  }
 
   public static void printPopulation(Population population, String heading) {
     System.out.println(heading);
