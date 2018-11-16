@@ -18,6 +18,8 @@ public class GeneticAlgorithm {
             "Generation # " + generationNumber + "] Selected for cross over " + chromosome1 + "and "
                 + chromosome2);
         crossoverPopulation.getChromosomes()[x] = crossoverChromosome(chromosome1, chromosome2);
+        System.out
+            .println("Result of cross over is  " + crossoverPopulation.getChromosomes()[x] + "\n");
       } else {
         if (Math.random() <= 0.50) {
           crossoverPopulation.getChromosomes()[x] = chromosome1;
@@ -27,8 +29,7 @@ public class GeneticAlgorithm {
 
       }
 
-      System.out
-          .println("Result of cross over is  " + crossoverPopulation.getChromosomes()[x] + "\n");
+
     }
     return crossoverPopulation;
   }
@@ -76,7 +77,7 @@ public class GeneticAlgorithm {
     for (int x = 0; x < chromosome.getGenes().length; x++) {
       //mutation rate will decide whether to mutate or not
       if (Math.random() < MUTATION_RATE) {
-        //once chromosome selected for mutation then assign 0 or 1 randomly to the genes  
+        //once chromosome selected for mutation then assign 0 or 1 randomly to the genes
         if (Math.random() < 0.5) {
           mutateChromosome.getGenes()[x] = 1;
         } else {

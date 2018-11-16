@@ -61,8 +61,8 @@ public class Driver {
   }
 
 
-  public static void printPopulation(Population population, String heading) {
-    System.out.println(heading);
+  public static void printPopulation(Population population, String tital) {
+    System.out.println(tital);
     System.out.println("-------------------------------------------------");
     for (int x = 0; x < population.chromosomes.length; x++) {
       System.out.println(
